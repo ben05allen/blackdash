@@ -1,15 +1,15 @@
 from dash import Input, Output
-import plotly.express as px
 import pandas as pd
-import yfinance as yf
-from calculations.blackscholes import BlackScholes
-from app import app
-import plotly.graph_objects as go
 import plotly.express as px
+import plotly.graph_objects as go
+import yfinance as yf
+
+from app import app
+from calculations.blackscholes import BlackScholes
 from calculations.forecast import (
-    model_geometric_brownian_motion, 
-    model_arima, 
-    model_prophet
+    model_geometric_brownian_motion,
+    model_arima,
+    model_prophet,
 )
 
 
@@ -20,47 +20,36 @@ from calculations.forecast import (
     Output("period_no", "max"),
     Output("period_no", "value"),
     Input("ticker", "value"),
-    Input("period_no","value"),
-    Input("period_type","value"),
-    Input("plot", "value")
+    Input("period_no", "value"),
+    Input("period_type", "value"),
+    Input("plot", "value"),
 )
 def update_figure(name, period_no, period_type, plot):
-    
     _period_map = {
         0: {
             "hours": {"code": "h", "max": 24, "min": 1},
             "days": {"code": "d", "max": 30, "min": 1},
             "months": {"code": "mo", "max": 12, "min": 1},
-            "years": {"code": "y", "max": 5, "min": 1}
+            "years": {"code": "y", "max": 5, "min": 1},
         },
         1: {
             "hours": {"code": "h", "max": 24, "min": 1},
             "days": {"code": "d", "max": 3, "min": 1},
             "months": {"code": "mo", "max": 3, "min": 1},
-            "years": {"code": "y", "max": 3, "min": 1}
-        }
+            "years": {"code": "y", "max": 3, "min": 1},
+        },
     }
 
     _interval_map = {
-        0 : {
-                "hours": "1m",
-                "days": "1m",
-                "months": "1h",
-                "years": "1d"
-        },
-        1 : {
-                "hours": "1m",
-                "days": "1m",
-                "months": "1d",
-                "years": "1d" 
-        }
+        0: {"hours": "1m", "days": "1m", "months": "1h", "years": "1d"},
+        1: {"hours": "1m", "days": "1m", "months": "1d", "years": "1d"},
     }
 
     _min = _period_map[plot][period_type]["min"]
     _max = _period_map[plot][period_type]["max"]
 
     if not _min <= period_no <= _max:
-        period_no = _min 
+        period_no = _min
 
     period = str(period_no) + _period_map[plot][period_type]["code"]
     ticker = pd.read_csv("data/tickers.csv").query(f'name == "{name}"').symbol
@@ -71,20 +60,21 @@ def update_figure(name, period_no, period_type, plot):
     if plot:
         fig = go.Figure(px.line(data.Close, x=data.index, y="Close"))
     else:
+
         def _split_data(data, period):
             if period == "hours":
                 window = 10
             else:
                 window = 7
 
-            lag = (len(data) % window)
+            lag = len(data) % window
             box_data = []
 
             for i in range(lag, len(data), window):
                 r = [x for x in range(i, i + window)]
                 box_data.append(data.iloc[r]["Adj Close"])
-            
-            box_data_T = []        
+
+            box_data_T = []
             for i in range(window):
                 temp = []
                 for j in range(len(box_data)):
@@ -97,19 +87,21 @@ def update_figure(name, period_no, period_type, plot):
         fig = go.Figure(px.box(y=box_data, x=box_index))
 
     fig.layout = go.Layout(
-            paper_bgcolor='rgba(0,0,0,0)',
-            plot_bgcolor='rgba(0,0,0,0)',
-
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
     )
-    fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='Gray', color="white")
-    fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='Gray', color="white", title_font_color="red")
+    fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor="Gray", color="white")
+    fig.update_yaxes(
+        showgrid=True,
+        gridwidth=1,
+        gridcolor="Gray",
+        color="white",
+        title_font_color="red",
+    )
     fig.update_layout(
-        xaxis_title=f"Time",
-        yaxis_title=f"Stock Price",
-        width=1000,
-        height=500
+        xaxis_title="Time", yaxis_title="Stock Price", width=1000, height=500
     )
-    fig.update_traces(line_color='#28788C')
+    fig.update_traces(line_color="#28788C")
 
     return fig, round(data["Close"].iloc[-1], 2), _min, _max, period_no
 
@@ -127,16 +119,15 @@ def update_figure(name, period_no, period_type, plot):
 def query(index, ticker, user_currency):
     data = pd.read_csv("data/tickers.csv").query(f'stockindex == "{index}"')
     currency = data.iloc[0].currency
-    
+
     stock_list = list(data.query(f'stockindex == "{index}"').name)
-    
+
     if ticker not in stock_list:
         ticker = stock_list[0]
-    
-    exchange = data.query(f'name == "{ticker}"').exchange.iloc[0]
-    
-    return stock_list, currency, exchange, ticker, user_currency
 
+    exchange = data.query(f'name == "{ticker}"').exchange.iloc[0]
+
+    return stock_list, currency, exchange, ticker, user_currency
 
 
 @app.callback(
@@ -159,24 +150,23 @@ def query(index, ticker, user_currency):
     Input("vol-days-input", "value"),
     Input("currency", "value"),
     Input("sigma-implied-input", "value"),
-    Input("days_in_year", "value")
+    Input("days_in_year", "value"),
 )
 def calculations(
-        ticker, 
-        maturity_days, 
-        strike, 
-        put_option, 
-        stock_price, 
-        american, 
-        vol_days,
-        currency,
-        implied_option_price,
-        days_in_year
-    ):
-
+    ticker,
+    maturity_days,
+    strike,
+    put_option,
+    stock_price,
+    american,
+    vol_days,
+    currency,
+    implied_option_price,
+    days_in_year,
+):
     _american = True if american else False
     _put_option = True if put_option else False
-    
+
     if not strike:
         if _put_option:
             strike = stock_price * 1.1
@@ -193,7 +183,7 @@ def calculations(
         maturity_days=maturity_days,
         currency=currency,
         american=_american,
-        days_in_year=days_in_year
+        days_in_year=days_in_year,
     )
 
     data = model.option_calculations()
@@ -212,6 +202,7 @@ def calculations(
         model.daily_volatility(vol_days) if vol_days else "N/A",
     )
 
+
 @app.callback(
     Output("gbm", "children"),
     Output("arima", "children"),
@@ -221,11 +212,11 @@ def calculations(
     Input("mu", "children"),
     Input("sigma-annual", "children"),
     Input("stock", "children"),
-    Input("days_in_year", "value")
+    Input("days_in_year", "value"),
 )
 def forecasts(ticker, maturity_days, mu, sigma, S0, days_in_year):
     return (
         model_geometric_brownian_motion(S0, mu, sigma, maturity_days, days_in_year),
         model_arima(ticker, maturity_days),
-        model_prophet(ticker, maturity_days)
+        model_prophet(ticker, maturity_days),
     )

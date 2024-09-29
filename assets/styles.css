@@ -1,12 +1,12 @@
 :root {
-    --main-color: 40, 120, 140;
+  --main-color: 40, 120, 140;
 }
 
 body {
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   color: #f0f0f0;
-  background-color: #10100E;  
+  background-color: #10100e;
   margin: 0;
   padding: 0;
   max-height: 100vh;
@@ -15,37 +15,38 @@ body {
   font-size: 0.8vw;
 }
 
-
 body::before {
-  z-index:-1;
+  z-index: -1;
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: #10100E;
-  background: radial-gradient(circle  at right top, rgba(var(--main-color), 0.1) 5%, #10100E 50%);
-  pointer-events: none; 
+  background: #10100e;
+  background: radial-gradient(
+    circle at right top,
+    rgba(var(--main-color), 0.1) 5%,
+    #10100e 50%
+  );
+  pointer-events: none;
 }
 
-
 .blackdash-logo {
-    width: 65%;
+  width: 65%;
 }
 
 .row1 {
-  z-index:2;
-    height: 60vh;
+  z-index: 2;
+  height: 60vh;
   display: flex;
-    margin-left: 3vw;
+  margin-left: 3vw;
   margin-right: 3vw;
   margin-top: 1vh;
-  
 }
 
-.row2{
-   z-index:2;
+.row2 {
+  z-index: 2;
   height: 40vh;
   display: flex;
   margin-left: 3vw;
@@ -54,38 +55,41 @@ body::before {
 }
 
 .div-stock {
-   z-index:2;
-    display: flex;
-    flex-direction: column;
-    width: 30vw; 
-    background: #161616;
-   background: radial-gradient(circle  at right top, rgba(var(--main-color), 0.3) 0%, rgba(var(--main-color), 0.2) 15%, #161616 65%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
+  background: #161616;
+  background: radial-gradient(
+    circle at right top,
+    rgba(var(--main-color), 0.3) 0%,
+    rgba(var(--main-color), 0.2) 15%,
+    #161616 65%
+  );
   border: 0px;
-  color: white;  
-    border-radius: 20px;
-    margin-right: 2vw;
-    padding: 40px;
+  color: white;
+  border-radius: 20px;
+  margin-right: 2vw;
+  padding: 40px;
   margin: 1vw;
 }
 
 .div-stock-color {
-    margin-top: auto;
+  margin-top: auto;
 }
 
 .div-graph {
-   z-index:2;
+  z-index: 2;
   display: flex;
-    width: 70vw;
-    padding: 30px;
-    justify-content: center;
-    align-items: center;
+  width: 70vw;
+  padding: 30px;
+  justify-content: center;
+  align-items: center;
   margin: 1vw;
 }
 
-
-
 .div-config {
-  z-index:2;
+  z-index: 2;
   flex-grow: 1;
   border: 1px solid #ffffff1c;
   border-radius: 30px;
@@ -95,14 +99,11 @@ body::before {
   align-items: center;
 }
 
-
 .author {
   font-size: 0.65vw;
   margin-top: 0.5vw;
   margin-bottom: 0.5vw;
 }
-
-
 
 .btn {
   background-color: rgba(var(--main-color));
@@ -119,9 +120,8 @@ body::before {
 }
 
 .btn:active {
-  background-color:rgba(var(--main-color));
+  background-color: rgba(var(--main-color));
 }
-
 
 input[type="number"],
 select,
@@ -132,7 +132,7 @@ input[type="range"] {
   border-radius: 10px;
   padding: 8px;
   padding-left: 10px;
-  padding-right: 10px; 
+  padding-right: 10px;
   margin-bottom: 16px;
 }
 
@@ -160,9 +160,8 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 label {
-  color:#fff;
+  color: #fff;
 }
-
 
 .row-div {
   display: flex;
@@ -174,7 +173,6 @@ label {
   border: solid rgba(100, 100, 100, 0.4) 2px !important;
 }
 
-
 .Select-value-label {
   color: white !important;
 }
@@ -183,12 +181,10 @@ label {
   color: white;
 }
 
-
 .VirtualizedSelectOption {
   background-color: rgb(25, 25, 25);
-  color:white;
+  color: white;
 }
-
 
 .VirtualizedSelectFocusedOption {
   background-color: blue;
@@ -196,7 +192,7 @@ label {
 }
 
 .select-menu-outer {
-  display : block !important;
+  display: block !important;
 }
 
 .radio-group .form-check {
@@ -302,14 +298,12 @@ h2 {
   margin-bottom: 1vw;
 }
 
-
 h3 {
   font-size: 1.2vw;
   color: rgba(var(--main-color), 0.9);
   margin: 0;
   margin-bottom: 20px;
 }
-
 
 h5 {
   font-size: 0.8vw;
@@ -319,8 +313,6 @@ h5 {
   margin-right: 0.5vw;
   font-size: 0.8rem;
 }
-
-
 
 td {
   padding-right: 1vw;
@@ -332,12 +324,10 @@ td {
   padding-left: 0vw;
 }
 
-
 .btn {
   --bs-btn-font-size: 0.8vw;
   margin-bottom: 1vw;
 }
-
 
 .div-stock-logo {
   max-width: 75%;
@@ -360,25 +350,23 @@ td {
 @media (max-width: 768px) {
   .row1,
   .row2 {
-      flex-direction: column;
-      height: auto;
+    flex-direction: column;
+    height: auto;
   }
-
 
   .div-stock,
   .div-graph,
   .div-config {
-      width: 85vw;
-      margin: 1vw;
-      margin-bottom: 4%;
-      padding: 3vw;
+    width: 85vw;
+    margin: 1vw;
+    margin-bottom: 4%;
+    padding: 3vw;
   }
 
   .div-stock {
-      margin-top: 5%;
+    margin-top: 5%;
   }
   .div-graph {
-      min-height: 50vh;
+    min-height: 50vh;
   }
-
 }
