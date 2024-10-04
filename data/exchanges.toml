@@ -1,19 +1,19 @@
 [Korea]
-    StockIndex = "Korea Composite Stock Price Index"
-    Exchange = "Korea Stock Exchange"
-    Currency = "KRW"
-    URL = "https://stockanalysis.com/list/korea-stock-exchange/"
-    TickersXPath = '//td[@class="sym svelte-eurwtr"]/a/text()'
-    NamesXPath = '//td[@class="slw svelte-eurwtr"]/text()'
-    TickerSuffix = ".KS"
-    Limit = 20
+stockindex = "Korea Composite Stock Price Index"
+exchange = "Korea Stock Exchange"
+currency = "KRW"
+url = "https://stockanalysis.com/list/korea-stock-exchange/"
+tickers_xpath = '//td[@class="sym svelte-eurwtr"]/a/text()'
+names_xpath = '//td[@class="slw svelte-eurwtr"]/text()'
+ticker_suffix = ".KS"
+limit = 20
 
 [Tokyo]
-    StockIndex = "NIKKEI 225"
-    Exchange = "Tokyo Stock Exchange"
-    Currency = "JPY"
-    URL = "https://stockanalysis.com/list/tokyo-stock-exchange/"
-    TickersXPath = '//td[@class="sym svelte-eurwtr"]/a/text()'
-    NamesXPath = '//td[@class="slw svelte-eurwtr"]/text()'
-    TickerSuffix = ".T"
-    Limit = 20
+stockindex = "NIKKEI 225"
+exchange = "Tokyo Stock Exchange"
+currency = "JPY"
+url = "https://stockanalysis.com/list/tokyo-stock-exchange/"
+tickers_xpath = '//td[@class="sym svelte-eurwtr"]/a/text()'
+names_xpath = '//td[@class="slw svelte-eurwtr"]/text()'
+ticker_suffix = ".T"
+limit = 20
