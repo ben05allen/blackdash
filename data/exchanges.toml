@@ -17,3 +17,13 @@ tickers_xpath = '//td[@class="sym svelte-eurwtr"]/a/text()'
 names_xpath = '//td[@class="slw svelte-eurwtr"]/text()'
 ticker_suffix = ".T"
 limit = 20
+
+[Switzerland]
+    stockindex = "SIX Swiss Exchange"
+    exchange = "SIX Swiss Exchange"
+    currency = "CHF"
+    url = "https://stockanalysis.com/list/six-swiss-exchange/"
+    tickers_xpath = '//td[@class="sym svelte-eurwtr"]/a/text()'
+    names_xpath = '//td[@class="slw svelte-eurwtr"]/text()'
+    ticker_suffix = ".SW"
+    limit = 20
