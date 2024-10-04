@@ -1,6 +1,7 @@
 [project]
 name = "blackdash"
 version = "0.1.0"
+authors = [{name="Yasser Naji"}]
 description = "Add your description here"
 readme = "README.md"
 license = { file = "LICENSE" }
